@@ -1,25 +1,15 @@
 import React, {useEffect} from 'react';
 
 import Story from "./Story";
-import axios from "axios";
+import {Link,} from "react-router-dom";
 
 function StoriesList(props) {
-  const { ids, storiesById, onUpdateListOfStories, onAddNewStory } = props;
+  const { ids, storiesById, onGetStories } = props;
 
   useEffect(() => {
+    onGetStories();
     const timerId = setInterval( () => {
-      axios.get(`https://hacker-news.firebaseio.com/v0/newstories.json?print=pretty`)
-      .then(function (response) {
-        // handle success
-        onUpdateListOfStories(response.data.filter((id, index) => index < 100));
-      })
-      .catch(function (error) {
-        // handle error
-        console.log(error);
-      })
-      .then(function () {
-        // always executed
-      });
+      onGetStories();
     }, 60000);
 
     return () => {
@@ -28,15 +18,14 @@ function StoriesList(props) {
   }, []);
 
   const renderList = () => {
-    const copyIds = [...ids];
-
-    return copyIds.map((id) => (
-      <Story
-        key={id}
-        id={id}
-        storiesById={storiesById}
-        onAddNewStory={onAddNewStory}
-      />
+    return ids.map((id) => (
+      <Link to={`/${id}`}>
+        <Story
+          key={id}
+          id={id}
+          storiesById={storiesById}
+        />
+      </Link>
       )
     )
   };
