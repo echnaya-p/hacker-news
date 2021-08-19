@@ -4,7 +4,7 @@ import axios from "axios";
 
 export const getStoriesIds = async () => {
   let stories = [];
-  const url = `https://hacker-news.firebaseio.com/v0/newstories.json?print=pretty`
+  const url = `https://hacker-news.firebaseio.com/v0/newstories.json?print=pretty`;
 
   try {
     stories = await axios.get(url);

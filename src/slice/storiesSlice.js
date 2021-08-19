@@ -48,9 +48,9 @@ export const storiesSlice = createSlice({
 
         stories.forEach((story) => {
           if (story) {
-            const { id, title, by, time, score, url, descendants } = story;
+            const { id, title, by, time, score, url, descendants, kids } = story;
 
-            state.storiesById[id] = { id, title, by, time, score, url, descendants };
+            state.storiesById[id] = { id, title, by, time, score, url, descendants, kids };
             ids.push(id);
           }
         });

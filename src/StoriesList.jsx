@@ -4,7 +4,7 @@ import Story from "./Story";
 import {Link,} from "react-router-dom";
 
 function StoriesList(props) {
-  const { ids, storiesById, onGetStories } = props;
+  const { storiesIds, storiesById, onGetStories } = props;
 
   useEffect(() => {
     onGetStories();
@@ -18,10 +18,9 @@ function StoriesList(props) {
   }, []);
 
   const renderList = () => {
-    return ids.map((id) => (
-      <Link to={`/${id}`}>
+    return storiesIds.map((id) => (
+      <Link to={`/${id}`} key={id}>
         <Story
-          key={id}
           id={id}
           storiesById={storiesById}
         />
