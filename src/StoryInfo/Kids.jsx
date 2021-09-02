@@ -1,35 +1,28 @@
 import React from "react";
 
 function Kids(props) {
-const { kidsData } = props;
-const renderListKids = () => {
+  const { kidsData } = props;
+  const renderKids = () => kidsData.map((kid) => {
+    return (
+      <li key={kid.id}>
+        <div>
+          <p>{kid.by}: </p>
+          <p>{kid.text}</p>
+          <p>{kid.time}</p>
+          </div>
+        {kid.kidsData && kid.kidsData.length > 0 &&
+        <Kids
+          kidsData={kid.kidsData}
+        />}
+      </li>
+    )
+    });
 
-  return (kidsData.map(kid => {
-
-    if(kid.kidsData) {
-
-      return <Kids
-        kidsData={kid.kidsData}
-        key={kid.id}
-      />
-    }
-
-      return (
-        <li key={kid.id}>
-          <p>{kid.id}</p>
-        </li>);
-    })
-
+  return (
+    <ul>
+      {renderKids()}
+    </ul>
   );
-};
-
-return (
-  <ul>
-    {kidsData.length > 0 && renderListKids()}
-  </ul>
-);
-
-
 }
 
 export default Kids;

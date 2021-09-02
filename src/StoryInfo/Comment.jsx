@@ -24,25 +24,16 @@ function Comment(props) {
 
   return (
     <div onClick={changeCommentState}>
-      <p>{commentsById?.[id]?.id}</p>
+      <div>
+        <p>{commentsById?.[id]?.by}: </p>
+        <p>{commentsById?.[id]?.text}</p>
+        <p>{commentsById?.[id]?.time}</p>
+      </div>
       <div>
           {isCommentOpened && commentsById?.[id]?.kidsData?.length > 0 && renderKids()}
       </div>
     </div>
   );
-
-  /*return (
-    <div onClick={changeKidsCommentsState}>
-      <p>{commentById?.[id]?.id}</p>
-      <p>{`${commentById?.[id]?.by}: ${commentById?.[id]?.text}`}</p>
-      <p>{commentById?.[id]?.time}</p>
-      <div>
-        <ul>
-          {commentById?.[id]?.kids?.length > 0 && renderListKids()}
-        </ul>
-      </div>
-    </div>
-  );*/
 }
 
 export default Comment;
