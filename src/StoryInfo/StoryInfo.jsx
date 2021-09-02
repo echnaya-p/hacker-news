@@ -5,17 +5,17 @@ import CommentsList from "./CommentsList";
 function StoryInfo(props) {
 
   const {id} = useParams();
-  const { storiesById, commentsIds, commentById, onUpdateComments, onGetComment } = props;
+  const { storiesById, commentsIds, commentsById, onGetComments, onGetKidsComments } = props;
 
     useEffect(() => {
-      onUpdateComments(storiesById?.[id]?.kids ?? []);
-      const timerId = setInterval( () => {
-        onUpdateComments(storiesById?.[id]?.kids ?? []);
-      }, 60000);
-
-      return () => {
-        clearInterval(timerId);
-      };
+      onGetComments(storiesById?.[id]?.kids ?? []);
+      // const timerId = setInterval( () => {
+      //   onGetComments(storiesById?.[id]?.kids ?? []);
+      // }, 60000);
+      //
+      // return () => {
+      //   clearInterval(timerId);
+      // };
     }, []);
 
 return (
@@ -34,8 +34,9 @@ return (
     </ul>
     <CommentsList
       commentsIds={commentsIds}
-      commentById={commentById}
-      onGetComment={onGetComment}
+      commentsById={commentsById}
+      onGetComments={onGetComments}
+      onGetKidsComments={onGetKidsComments}
     />
   </div>
 );

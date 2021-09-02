@@ -2,15 +2,15 @@ import React from "react";
 import Comment from "./Comment";
 
 function CommentsList(props) {
-  const { commentsIds, commentById, onGetComment } = props;
+  const { commentsIds, commentsById, onGetKidsComments } = props;
 
   const renderList = () => {
     return commentsIds.map((id) => (
       <li key={id}>
         <Comment
           id={id}
-          commentById={commentById}
-          onGetComment={onGetComment}
+          commentsById={commentsById}
+          onGetKidsComments={onGetKidsComments}
         />
       </li>
       )
@@ -18,11 +18,9 @@ function CommentsList(props) {
   };
 
   return (
-    <div>
-      <ul>
+    <ul>
       {commentsIds.length > 0 && renderList()}
-      </ul>
-    </div>
+    </ul>
   );
 }
 

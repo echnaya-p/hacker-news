@@ -12,6 +12,7 @@ function Story(props) {
         <li>Автор: {storiesById?.[id]?.by}</li>
         <li>Дата: {storiesById?.[id]?.time}</li>
         <li>Рейтинг: {storiesById?.[id]?.score}</li>
+        <li>Коментариев: {storiesById?.[id]?.descendants}</li>
       </ul>
     </div>
   );

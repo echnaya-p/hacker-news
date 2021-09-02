@@ -1,26 +1,23 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import './App.css';
 import StoriesList from "./StoriesList";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchStories } from "./slice/storiesSlice";
 import { Switch, Route, BrowserRouter as Router } from 'react-router-dom';
 import StoryInfo from './StoryInfo/StoryInfo';
-import {fetchComment, updateComments} from "./slice/commentsSlice";
+import { fetchComments, fetchKidsComments } from "./slice/commentsSlice";
 
 function App() {
   const storiesIds = useSelector((state) => state.stories.ids);
   const storiesById = useSelector((state) => state.stories.storiesById);
   const commentsIds = useSelector((state) => state.comments.ids);
-  const commentById = useSelector((state) => state.comments.commentById);
+  const commentsById = useSelector((state) => state.comments.commentsById);
   const dispatch = useDispatch();
 
   const handleGetStories = () => dispatch(fetchStories());
-  const handleUpdateComments = (comments) => dispatch(updateComments(comments));
-  const handleGetComment = (id) => dispatch(fetchComment(id));
+  const handleGetComments = (ids) => dispatch(fetchComments(ids));
+  const handleGetKidsComments = (ids) => dispatch(fetchKidsComments(ids));
 
-  const refresh = () => {
-    handleGetStories();
-  };
 
   return (
     <div className="App">
@@ -30,7 +27,7 @@ function App() {
       <Router>
       <Switch>
         <Route exact path='/'>
-          <button onClick={refresh}>Обновить</button>
+          <button onClick={handleGetStories}>Обновить</button>
           <StoriesList
             storiesIds={storiesIds}
             storiesById={storiesById}
@@ -41,9 +38,9 @@ function App() {
           <StoryInfo
             storiesById={storiesById}
             commentsIds={commentsIds}
-            commentById={commentById}
-            onUpdateComments={handleUpdateComments}
-            onGetComment={handleGetComment}
+            commentsById={commentsById}
+            onGetComments={handleGetComments}
+            onGetKidsComments={handleGetKidsComments}
           />
         </Route>
       </Switch>
