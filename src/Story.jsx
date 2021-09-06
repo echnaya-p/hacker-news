@@ -2,6 +2,7 @@ import React from 'react';
 
 function Story(props) {
   const { id, storiesById } = props;
+  const date = new Date(storiesById?.[id]?.time).toLocaleString("ru");
 
   return (
     <div>
@@ -10,7 +11,7 @@ function Story(props) {
       </h2>
       <ul>
         <li>Автор: {storiesById?.[id]?.by}</li>
-        <li>Дата: {storiesById?.[id]?.time}</li>
+        <li>Опубликовано: {date}</li>
         <li>Рейтинг: {storiesById?.[id]?.score}</li>
       </ul>
     </div>

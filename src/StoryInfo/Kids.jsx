@@ -2,13 +2,20 @@ import React from "react";
 
 function Kids(props) {
   const { kidsData } = props;
+
   const renderKids = () => kidsData.map((kid) => {
+    const date = new Date(kid.time).toLocaleString("ru");
+
+    function createMessage() {
+      return {__html: kid.text};
+    }
+
     return (
       <li key={kid.id}>
         <div>
           <p>{kid.by}: </p>
-          <p>{kid.text}</p>
-          <p>{kid.time}</p>
+          <div dangerouslySetInnerHTML={createMessage()}/>
+          <p>{date}</p>
           </div>
         {kid.kidsData && kid.kidsData.length > 0 &&
         <Kids
