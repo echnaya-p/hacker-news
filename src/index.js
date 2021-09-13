@@ -5,10 +5,13 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { store } from "./store";
 import { Provider } from "react-redux";
+import {Typography} from "antd";
 
 ReactDOM.render(
   <Provider store={store}>
+    <Typography>
     <App />
+    </Typography>
   </Provider>,
   document.getElementById('root')
 );
