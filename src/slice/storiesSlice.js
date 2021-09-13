@@ -29,6 +29,7 @@ export const storiesSlice = createSlice({
     request: {
       isLoading: false,
       error: null,
+      isFetchSuccess: null,
     },
   },
   reducers: {
@@ -37,10 +38,12 @@ export const storiesSlice = createSlice({
     builder
       .addCase(fetchStories.pending, (state, action) => {
         state.request.isLoading = true;
+        state.request.isFetchSuccess = false;
       })
       .addCase(fetchStories.rejected, (state, action) => {
         state.request.isLoading = false;
         state.request.error = action.payload;
+        state.request.isFetchSuccess = false;
       })
       .addCase(fetchStories.fulfilled, (state, action) => {
         const stories = action.payload;
@@ -56,6 +59,7 @@ export const storiesSlice = createSlice({
         });
         state.ids = ids;
         state.request.isLoading = false;
+        state.request.isFetchSuccess = true;
       })
   },
 });

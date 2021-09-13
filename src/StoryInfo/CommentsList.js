@@ -1,26 +1,47 @@
 import React from "react";
 import Comment from "./Comment";
+import {Skeleton} from "antd";
 
 function CommentsList(props) {
-  const { commentsIds, commentsById, onGetKidsComments } = props;
+  const {
+    commentsIds,
+    commentsById,
+    onGetKidsComments,
+    isLoadingComments,
+    isFetchCommentsSuccess,
+    isLoadingKid,
+    isFetchKidsSuccess
+  } = props;
 
   const renderList = () => {
     return commentsIds.map((id) => (
-      <li key={id}>
         <Comment
+          key={id}
           id={id}
           commentsById={commentsById}
           onGetKidsComments={onGetKidsComments}
+          isLoadingKid={isLoadingKid}
+          isFetchKidsSuccess={isFetchKidsSuccess}
         />
-      </li>
       )
     )
   };
 
+  const renderSkeleton = () => {
+    const skeletonList = [];
+
+    for (let i = 0; i < 5; i += 1) {
+      skeletonList.push(<Skeleton avatar paragraph={{ rows: 3 }} />)
+    }
+
+    return skeletonList.map((item) => item);
+  };
+
   return (
-    <ul>
-      {commentsIds.length > 0 && renderList()}
-    </ul>
+    <div style={{width: '1000px'}}>
+      {isLoadingComments && renderSkeleton()}
+      {isFetchCommentsSuccess && commentsIds.length > 0 && renderList()}
+    </div>
   );
 }
 

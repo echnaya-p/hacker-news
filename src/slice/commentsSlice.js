@@ -47,7 +47,10 @@ export const commentsSlice = createSlice({
     commentsById: {},
     request: {
       isLoading: false,
+      isLoadingKid: false,
       error: null,
+      isFetchSuccess: null,
+      isFetchKidsSuccess: null,
     },
   },
   reducers: {
@@ -56,10 +59,12 @@ export const commentsSlice = createSlice({
     builder
       .addCase(fetchComments.pending, (state, action) => {
         state.request.isLoading = true;
+        state.request.isFetchSuccess = false;
       })
       .addCase(fetchComments.rejected, (state, action) => {
         state.request.isLoading = false;
         state.request.error = action.payload;
+        state.request.isFetchSuccess = false;
       })
       .addCase(fetchComments.fulfilled, (state, action) => {
         const comments = action.payload;
@@ -73,13 +78,16 @@ export const commentsSlice = createSlice({
         });
         state.ids = ids;
         state.request.isLoading = false;
+        state.request.isFetchSuccess = true;
       })
       .addCase(fetchKidsComments.pending, (state, action) => {
-        state.request.isLoading = true;
+        state.request.isLoadingKid = true;
+        state.request.isFetchKidsSuccess = false;
       })
       .addCase(fetchKidsComments.rejected, (state, action) => {
-        state.request.isLoading = false;
+        state.request.isLoadingKid = false;
         state.request.error = action.payload;
+        state.request.isFetchKidsSuccess = false;
       })
       .addCase(fetchKidsComments.fulfilled, (state, action) => {
         const comments = action.payload;
@@ -90,7 +98,8 @@ export const commentsSlice = createSlice({
           state.commentsById[parentId].kidsData = comments;
         }
 
-        state.request.isLoading = false;
+        state.request.isLoadingKid = false;
+        state.request.isFetchKidsSuccess = true;
       })
 
   },

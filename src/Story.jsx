@@ -1,20 +1,20 @@
 import React from 'react';
+import {Typography, Card} from 'antd';
+import {StarOutlined} from '@ant-design/icons';
+import {formatDate} from "./utils/dataUtils";
+
+const {Paragraph} = Typography;
 
 function Story(props) {
   const { id, storiesById } = props;
-  const date = new Date(storiesById?.[id]?.time).toLocaleString("ru");
+  const date = formatDate(storiesById?.[id]?.time);
 
   return (
-    <div>
-      <h2>
-        {storiesById?.[id]?.title}
-      </h2>
-      <ul>
-        <li>Автор: {storiesById?.[id]?.by}</li>
-        <li>Опубликовано: {date}</li>
-        <li>Рейтинг: {storiesById?.[id]?.score}</li>
-      </ul>
-    </div>
+    <Card title={storiesById?.[id]?.title}>
+      <Paragraph><StarOutlined /> {storiesById?.[id]?.score}</Paragraph>
+        <Paragraph>Автор: {storiesById?.[id]?.by}</Paragraph>
+        <Paragraph>Опубликовано: {date}</Paragraph>
+    </Card>
   );
 }
 
