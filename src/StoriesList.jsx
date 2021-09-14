@@ -5,7 +5,6 @@ import {Row, Col, Skeleton} from 'antd';
 
 function StoriesList(props) {
   const { storiesIds, storiesById, onGetStories, isLoadingStories, isFetchStoriesSuccess } = props;
-  console.log(new Date(1631121426));
 
   useEffect(() => {
     onGetStories();

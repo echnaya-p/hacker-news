@@ -8,6 +8,7 @@ import { fetchComments, fetchKidsComments } from "./slice/commentsSlice";
 import {Typography, Button, Layout, Row, Col} from "antd";
 import {ReloadOutlined} from '@ant-design/icons';
 import 'antd/dist/antd.css';
+import './app.css';
 
 const {Title} = Typography;
 const {Header, Content} = Layout;
@@ -32,14 +33,14 @@ function App() {
 
   return (
     <Layout>
-      <Header style={{color: "white", padding: '0 5%',}}>Hackers news</Header>
-      <Content style={{padding: '10px 5%'}}>
+      <Header className='Header'>Hackers news</Header>
+      <Content className='Content'>
       <Router>
       <Switch>
         <Route exact path='/'>
           <Row>
             <Col><Title>Последние новости</Title></Col>
-            <Col style={{padding: '10px 10px'}}><Button onClick={handleGetStories}><ReloadOutlined /></Button></Col>
+            <Col className='Button-refresh'><Button onClick={handleGetStories}><ReloadOutlined /></Button></Col>
           </Row>
            <StoriesList
             storiesIds={storiesIds}

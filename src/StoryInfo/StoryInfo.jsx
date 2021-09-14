@@ -1,12 +1,12 @@
-import React, {useEffect} from 'react';
-import {Link, useParams} from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { Link, useParams } from 'react-router-dom';
 import CommentsList from "./CommentsList";
-import {Row, Col, Typography, Button} from "antd";
-import {ArrowLeftOutlined, ReloadOutlined} from '@ant-design/icons';
-import {formatDate} from "../utils/dataUtils";
+import { Typography, Button } from "antd";
+import { ArrowLeftOutlined, ReloadOutlined } from '@ant-design/icons';
+import { formatDate } from "../utils/dataUtils";
 import Space from "antd/es/space";
 
-const {Title, Text} = Typography;
+const { Title, Text } = Typography;
 
 function StoryInfo(props) {
 
@@ -38,7 +38,7 @@ function StoryInfo(props) {
 return (
   <div>
 
-    <Link to='/' style={{padding: '10px 10px'}}><ArrowLeftOutlined /> Главная </Link>
+    <Link to='/' className='Link-Back'><ArrowLeftOutlined /> Главная </Link>
     <Title>{storiesById?.[id]?.title}</Title>
     <Space direction="vertical">
     <Text>

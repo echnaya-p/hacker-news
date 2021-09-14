@@ -31,14 +31,14 @@ function CommentsList(props) {
     const skeletonList = [];
 
     for (let i = 0; i < 5; i += 1) {
-      skeletonList.push(<Skeleton avatar paragraph={{ rows: 3 }} />)
+      skeletonList.push(<Skeleton avatar paragraph={{ rows: 3 }} key={i} />)
     }
 
     return skeletonList.map((item) => item);
   };
 
   return (
-    <div style={{width: '1000px'}}>
+    <div className='Comment-list'>
       {isLoadingComments && renderSkeleton()}
       {isFetchCommentsSuccess && commentsIds.length > 0 && renderList()}
     </div>

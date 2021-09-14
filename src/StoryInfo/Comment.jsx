@@ -40,7 +40,7 @@ function Comment(props) {
         onClick={changeCommentState}
         author={commentsById?.[id]?.by}
         content={<div dangerouslySetInnerHTML={createMessage()}/>}
-        datetime={formatDate}
+        datetime={date}
         avatar={<Avatar
           size={45}
           icon={<UserOutlined />}
