@@ -1,31 +1,29 @@
-import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
-import {getComment} from "../api/getComment";
-import {getKidsComments} from "../api/getKidsComments";
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import getComment from '../api/getComment';
+import getKidsComments from '../api/getKidsComments';
 
 export const fetchComments = createAsyncThunk(
   'comments/fetchComments',
-  async (ids, {rejectWithValue}) => {
+  async (ids, { rejectWithValue }) => {
     const commentIds = ids;
     let comments = [];
 
     try {
-      comments =  await Promise.all(
-        commentIds.map(async (id) => {
-          return getComment(id);
-        })
+      comments = await Promise.all(
+        commentIds.map(async (id) => getComment(id)),
       );
     } catch (e) {
       console.log(e);
-      return rejectWithValue(e?.response?.data)
+      return rejectWithValue(e?.response?.data);
     }
 
     return comments;
-  }
+  },
 );
 
 export const fetchKidsComments = createAsyncThunk(
   'comments/fetchKidsComments',
-  async (kidsIds, {rejectWithValue}) => {
+  async (kidsIds, { rejectWithValue }) => {
     let comments = [];
 
     try {
@@ -33,11 +31,11 @@ export const fetchKidsComments = createAsyncThunk(
     } catch (e) {
       console.log(e);
 
-      return rejectWithValue(e?.response?.data)
+      return rejectWithValue(e?.response?.data);
     }
 
     return comments;
-  }
+  },
 );
 
 export const commentsSlice = createSlice({
@@ -53,11 +51,10 @@ export const commentsSlice = createSlice({
       isFetchKidsSuccess: null,
     },
   },
-  reducers: {
-  },
+  reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(fetchComments.pending, (state, action) => {
+      .addCase(fetchComments.pending, (state) => {
         state.request.isLoading = true;
         state.request.isFetchSuccess = false;
       })
@@ -80,7 +77,7 @@ export const commentsSlice = createSlice({
         state.request.isLoading = false;
         state.request.isFetchSuccess = true;
       })
-      .addCase(fetchKidsComments.pending, (state, action) => {
+      .addCase(fetchKidsComments.pending, (state) => {
         state.request.isLoadingKid = true;
         state.request.isFetchKidsSuccess = false;
       })
@@ -100,11 +97,8 @@ export const commentsSlice = createSlice({
 
         state.request.isLoadingKid = false;
         state.request.isFetchKidsSuccess = true;
-      })
-
+      });
   },
 });
-
-//export const {} = commentsSlice.actions;
 
 export default commentsSlice.reducer;

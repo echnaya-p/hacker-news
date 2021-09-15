@@ -1,24 +1,22 @@
-import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
-import {getStoriesIds} from "../api/getStoriesIds";
-import {getStory} from "../api/getStory";
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import getStoriesIds from '../api/getStoriesIds';
+import getStory from '../api/getStory';
 
 export const fetchStories = createAsyncThunk(
   'stories/fetchStories',
-  async (_, {rejectWithValue}) => {
+  async (_, { rejectWithValue }) => {
     const storiesIds = await getStoriesIds();
     let stories = [];
 
     try {
-      stories = await Promise.all(
-        storiesIds.map(async (id) => getStory(id))
-      );
+      stories = await Promise.all(storiesIds.map(async (id) => getStory(id)));
     } catch (e) {
       console.log(e);
-      return rejectWithValue(e?.response?.data)
+      return rejectWithValue(e?.response?.data);
     }
 
     return stories;
-  }
+  },
 );
 
 export const storiesSlice = createSlice({
@@ -32,11 +30,10 @@ export const storiesSlice = createSlice({
       isFetchSuccess: null,
     },
   },
-  reducers: {
-  },
+  reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(fetchStories.pending, (state, action) => {
+      .addCase(fetchStories.pending, (state) => {
         state.request.isLoading = true;
         state.request.isFetchSuccess = false;
       })
@@ -51,16 +48,26 @@ export const storiesSlice = createSlice({
 
         stories.forEach((story) => {
           if (story) {
-            const { id, title, by, time, score, url, descendants, kids } = story;
+            const { id, title, by, time, score, url, descendants, kids } =
+              story;
 
-            state.storiesById[id] = { id, title, by, time, score, url, descendants, kids };
+            state.storiesById[id] = {
+              id,
+              title,
+              by,
+              time,
+              score,
+              url,
+              descendants,
+              kids,
+            };
             ids.push(id);
           }
         });
         state.ids = ids;
         state.request.isLoading = false;
         state.request.isFetchSuccess = true;
-      })
+      });
   },
 });
 
