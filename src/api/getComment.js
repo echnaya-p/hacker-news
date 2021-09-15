@@ -1,8 +1,6 @@
-import axios from "axios";
+import axios from 'axios';
 
-//создать стори api как класс с методами getStoriesIds и т.д.
-
-export const getComment = async (id) => {
+const getComment = async (id) => {
   let comment = null;
   const url = `https://hacker-news.firebaseio.com/v0/item/${id}.json?print=pretty`;
 
@@ -15,3 +13,5 @@ export const getComment = async (id) => {
 
   return comment;
 };
+
+export default getComment;

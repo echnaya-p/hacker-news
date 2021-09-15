@@ -1,19 +1,19 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
+import { Provider } from 'react-redux';
+import { Typography } from 'antd';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import { store } from "./store";
-import { Provider } from "react-redux";
-import {Typography} from "antd";
+import store from './store';
 
 ReactDOM.render(
   <Provider store={store}>
     <Typography>
-    <App />
+      <App />
     </Typography>
   </Provider>,
-  document.getElementById('root')
+  document.getElementById('root'),
 );
 
 // If you want to start measuring performance in your app, pass a function
